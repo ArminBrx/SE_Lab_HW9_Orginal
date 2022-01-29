@@ -46,13 +46,10 @@ public class ParseTable {
                     }else
                     if(terminals.containsKey(j))
                     {
-//                        try {
                         Token t = terminals.get(j);
                         Action a = new Action(cols[j].charAt(0) == 'r' ? act.reduce : act.shift, Integer.parseInt(cols[j].substring(1)));
                             actionTable.get(actionTable.size() - 1).put(t, a);
-//                        }catch (StringIndexOutOfBoundsException e){
-//                            e.printStackTrace();
-//                        }
+                      }
                     }
                     else if(nonTerminals.containsKey(j)){
                         gotoTable.get(gotoTable.size()-1).put(nonTerminals.get(j),Integer.parseInt(cols[j]));
@@ -63,17 +60,11 @@ public class ParseTable {
                 }
             }
         }
-    }
 
     public int getGotoTable(int currentState, NonTerminal variable )
     {
-//        try {
-            return gotoTable.get(currentState).get(variable);
-//        }catch (NullPointerException dd)
-//        {
-//            dd.printStackTrace();
-//        }
-//        return 0;
+        return gotoTable.get(currentState).get(variable);
+
     }
     public Action getActionTable(int currentState ,Token terminal)
     {
