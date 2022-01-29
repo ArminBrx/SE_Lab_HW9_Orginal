@@ -6,6 +6,11 @@ package errorHandler;
 public class ErrorHandler {
     public static boolean hasError = false;
 
+    //1
+    public static boolean getError() {
+        return hasError;
+    }
+
     public static void setError(boolean temp) {
         hasError = temp;
     }
