@@ -43,12 +43,13 @@ public class Parser {
 
   public void startParse(java.util.Scanner sc) {
     lexicalAnalyzer = new lexicalAnalyzer(sc);
+    lookAhead = lexicalAnalyzer.getNextToken();
+    finish = false;
     Action currentAction;
     while (!finish) {
       try {
 
         currentAction = parseTable.getActionTable(parsStack.peek(), lookAhead);
-
 
         switch (currentAction.action) {
           case shift:
@@ -68,12 +69,12 @@ public class Parser {
             try {
               cg.semanticFunction(rule.semanticAction, lookAhead);
             } catch (Exception e) {
-
+                System.out.println("Error " + e);
             }
             break;
-          case accept:
-            finish = true;
-            break;
+//          case accept:
+//            finish = true;
+//            break;
         }
 
 
