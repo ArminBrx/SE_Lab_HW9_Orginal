@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import Log.Log;
 import codeGenerator.CodeGenerator;
 import errorHandler.ErrorHandler;
 import scanner.lexicalAnalyzer;
@@ -47,11 +46,9 @@ public class Parser {
     Action currentAction;
     while (!finish) {
       try {
-        Log.print(/*"lookahead : "+*/ lookAhead.toString() + "\t" + parsStack.peek());
-//                Log.print("state : "+ parsStack.peek());
+
         currentAction = parseTable.getActionTable(parsStack.peek(), lookAhead);
-        Log.print(currentAction.toString());
-        //Log.print("");
+
 
         switch (currentAction.action) {
           case shift:
@@ -65,22 +62,20 @@ public class Parser {
               parsStack.pop();
             }
 
-            Log.print(/*"state : " +*/ parsStack.peek() + "\t" + rule.LHS);
-//                        Log.print("LHS : "+rule.LHS);
+
             parsStack.push(parseTable.getGotoTable(parsStack.peek(), rule.LHS));
-            Log.print(/*"new State : " + */parsStack.peek() + "");
-//                        Log.print("");
+
             try {
               cg.semanticFunction(rule.semanticAction, lookAhead);
             } catch (Exception e) {
-              Log.print("Code Genetator Error");
+
             }
             break;
           case accept:
             finish = true;
             break;
         }
-        Log.print("");
+
 
       } catch (Exception ignored) {
 
