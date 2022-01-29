@@ -23,7 +23,7 @@ public class ParseTable {
                 try {
                     nonTerminals.put(i, NonTerminal.valueOf(temp));
                 }catch (Exception e){
-
+                    System.out.println("Exception : "+ e);
                 }
             }
             else {
