@@ -20,7 +20,7 @@ public class Parser {
   private lexicalAnalyzer lexicalAnalyzer;
   private CodeGenerator cg;
   private Token lookAhead;
-  private boolean finish;
+  private boolean finish;;
 
   public Parser() {
     parsStack = new Stack<Integer>();
@@ -41,6 +41,42 @@ public class Parser {
     cg = new CodeGenerator();
   }
 
+  public boolean shiftAction(Action t1, act t2) {
+    if(t1.action == t2) {
+      parsStack.push(t1.number);
+      lookAhead = lexicalAnalyzer.getNextToken();
+      return true;
+    }
+    return false;
+  }
+
+  public boolean reduceAction(Action t1, act t2) {
+    if(t1.action == t2) {
+      Rule rule = rules.get(t1.number);
+      for (int i = 0; i < rule.RHS.size(); i++) {
+        parsStack.pop();
+      }
+
+//                      Log.print("LHS : "+rule.LHS);
+      parsStack.push(parseTable.getGotoTable(parsStack.peek(), rule.LHS));
+//                      Log.print("");
+      try {
+        cg.semanticFunction(rule.semanticAction, lookAhead);
+      } catch (Exception e) {
+      }
+      return true;
+    }
+    return false;
+  }
+
+  public boolean acceptAction(Action t1, act t2) {
+    if(t1.action == t2) {
+      finish = true;
+      return true;
+    }
+    return false;
+  }
+
   public void startParse(java.util.Scanner sc) {
     lexicalAnalyzer = new lexicalAnalyzer(sc);
     lookAhead = lexicalAnalyzer.getNextToken();
@@ -48,8 +84,13 @@ public class Parser {
     Action currentAction;
     while (!finish) {
       try {
-
+//                Log.print("state : "+ parsStack.peek());
         currentAction = parseTable.getActionTable(parsStack.peek(), lookAhead);
+        //Log.print("");
+
+//        if(shiftAction(currentAction,act.shift)) break;
+//        if(reduceAction(currentAction,act.reduce)) break;
+        if(acceptAction(currentAction,act.accept)) break;
 
         switch (currentAction.action) {
           case shift:
@@ -63,18 +104,18 @@ public class Parser {
               parsStack.pop();
             }
 
-
+//                      Log.print("LHS : "+rule.LHS);
             parsStack.push(parseTable.getGotoTable(parsStack.peek(), rule.LHS));
-
+//                      Log.print("");
             try {
               cg.semanticFunction(rule.semanticAction, lookAhead);
             } catch (Exception e) {
-                System.out.println("Error " + e);
+              System.out.println("Error " + e);
             }
             break;
-//          case accept:
-//            finish = true;
-//            break;
+//        case accept:
+//          finish = true;
+//          break;
         }
 
 
