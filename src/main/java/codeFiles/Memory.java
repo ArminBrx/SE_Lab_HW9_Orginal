@@ -72,6 +72,31 @@ class _3AddressCode {
         Operand3 = opr3;
     }
 
+    public Address getOperand1() {
+        return Operand1;
+    }
+    public Address getOperand2() {
+        return Operand2;
+    }
+    public Address getOperand3() {
+        return Operand3;
+    }
+    public Operation getOperation() {
+        return operation;
+    }
+    public void setOperand1(Address temp) {
+        Operand1 = temp;
+    }
+    public void setOperand2(Address temp) {
+        Operand2 = temp;
+    }
+    public void setOperand3(Address temp) {
+        Operand3 = temp;
+    }
+    public void setOperation(Operation temp) {
+        operation = temp;
+    }
+
     public String toString()
     {
         if(operation == null) return "";
