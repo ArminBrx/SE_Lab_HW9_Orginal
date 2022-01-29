@@ -6,8 +6,13 @@ package errorHandler;
 public class ErrorHandler {
     public static boolean hasError = false;
 
+    public static void setError(boolean temp) {
+        hasError = temp;
+    }
+
     public static void printError(String msg) {
         hasError = true;
         System.out.println(msg);
     }
 }
+
