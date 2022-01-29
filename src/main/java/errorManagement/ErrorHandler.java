@@ -1,4 +1,4 @@
-package errorHandler;
+package errorManagement;
 
 /**
  * Created by Alireza on 6/28/2015.

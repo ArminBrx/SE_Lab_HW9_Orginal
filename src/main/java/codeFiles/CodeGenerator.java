@@ -1,7 +1,7 @@
 package codeFiles;
 
 import Log.Log;
-import errorHandler.ErrorHandler;
+import errorManagement.ErrorHandler;
 import scanner.token.Token;
 import semantic.symbol.Symbol;
 import semantic.symbol.SymbolTable;

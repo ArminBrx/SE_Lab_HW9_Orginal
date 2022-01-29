@@ -5,7 +5,7 @@ import codeFiles.Address;
 import codeFiles.Memory;
 import codeFiles.TypeAddress;
 import codeFiles.varType;
-import errorHandler.ErrorHandler;
+import errorManagement.ErrorHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;

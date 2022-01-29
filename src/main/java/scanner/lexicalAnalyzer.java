@@ -1,6 +1,6 @@
 package scanner;
 
-import errorHandler.ErrorHandler;
+import errorManagement.ErrorHandler;
 import scanner.token.Token;
 import scanner.type.Type;
 
