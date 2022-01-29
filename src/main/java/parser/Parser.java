@@ -19,6 +19,8 @@ public class Parser {
   private ParseTable parseTable;
   private lexicalAnalyzer lexicalAnalyzer;
   private CodeGenerator cg;
+  private Token lookAhead;
+  private boolean finish;
 
   public Parser() {
     parsStack = new Stack<Integer>();
@@ -41,8 +43,6 @@ public class Parser {
 
   public void startParse(java.util.Scanner sc) {
     lexicalAnalyzer = new lexicalAnalyzer(sc);
-    Token lookAhead = lexicalAnalyzer.getNextToken();
-    boolean finish = false;
     Action currentAction;
     while (!finish) {
       try {
