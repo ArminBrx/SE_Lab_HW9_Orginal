@@ -1,4 +1,4 @@
-package codeGenerator;
+package codeFiles;
 
 import Log.Log;
 import errorHandler.ErrorHandler;
