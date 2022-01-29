@@ -20,14 +20,12 @@ public class Address {
         this.varType = varType;
     }
     public String toString(){
-        switch (Type){
-            case Direct:
-                return num+"";
-            case Indirect:
-                return "@"+num;
-            case Imidiate:
-                return "#"+num;
-        }
+        if(Type == TypeAddress.Direct)
+            return num+"";
+        if(Type == TypeAddress.Indirect)
+            return "@"+num;
+        if(Type == TypeAddress.Imidiate)
+            return "#"+num;
         return num+"";
     }
 }
